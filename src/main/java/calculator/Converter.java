@@ -28,15 +28,6 @@ public class Converter {
     }
 
     private static int ToInt(String[] values) {
-        List<Integer> numberList = Arrays.stream(values).map(Integer::parseInt).collect(Collectors.toList());
-
-        int result = 0;
-        for (int i = 0; i < numberList.size(); i++) {
-            if (numberList.get(i) < 0) {
-                throw new RuntimeException();
-            }
-            result += numberList.get(i);
-        }
-        return result;
+       return Arrays.stream(values).map(value -> new Positive(value).getNumber()).mapToInt(i -> i).sum();
     }
 }
